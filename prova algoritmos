@@ -52,7 +52,8 @@ int main(int argc, char** argv) {
             scanf("%d", &fileira);
             printf("\nDigite a coluna de poltrona que deseja pode ser [A][B][C][D][E] ou [F]: ");
             scanf(" %c", &poltrona);
-            
+
+            //para aceitar letras minusculas e maiusculas
             poltrona = toupper(poltrona);
             
             switch (poltrona) {
