@@ -1,119 +1,126 @@
 #include <iostream>
 
 int main(int argc, char** argv) {
-	
-	char reserva[10][6] = {
-		{' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' '},
-		{' ', ' ', ' ', ' ', ' ', ' '}
-	};
-	printf("\n........ Mapa de Poltronas! :D .......\n");
-	printf("\nSegue legenda para maior entedimento:\n");
-	printf("\n[ ]--> para poltrona disponivel\n");
-	printf("\n[x]--> para poltrona nao disponivel\n");
-	printf("\n\t\t[A] [B] [C]\t[D] [E] [F]\n");
-	for (int x = 0; x < 10; x++) {
-		if (x != 9)	printf("\n\t0%d\t", x + 1);
-		else		printf("\n\t%d\t", x + 1);
-		
-		for (int y = 0; y < 6; y++) {
-			printf("[ ] ");
-			if (y == 2) {
-				printf("\t");
-			}
-		}
-	}
-	printf("\n\n__________________________________________\n");
-	
-	int fileira = -1, acento = -1;
-	char poltrona = ' ';
-	char tipoPassagem;
-	char continuarReserva = 's'; // Para continuar as reservas
+    
+    char reserva[10][6] = {
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' '},
+        {' ', ' ', ' ', ' ', ' ', ' '}
+    };
+    printf("\n........ Mapa de Poltronas! :D .......\n");
+    printf("\nSegue legenda para maior entendimento:\n");
+    printf("\n[ ]--> para poltrona disponivel\n");
+    printf("\n[x]--> para poltrona ocupada\n");
+    printf("\n\t\t[A] [B] [C]\t[D] [E] [F]\n");
+    for (int x = 0; x < 10; x++) {
+        if (x != 9)    printf("\n\t0%d\t", x + 1);
+        else        printf("\n\t%d\t", x + 1);
+        
+        for (int y = 0; y < 6; y++) {
+            printf("[ ] ");
+            if (y == 2) {
+                printf("\t");
+            }
+        }
+    }
+    printf("\n\n__________________________________________\n");
+    
+    int fileira = -1, acento = -1;
+    char poltrona = ' ';
+    char tipoPassagem;
+    char continuarReserva = 's'; // Para continuar as reservas
 
-	while (continuarReserva != 'n' && continuarReserva != 'N') {
-		printf("\nDigite o tipo de poltrona que prefere [1] econômica ou [2] executiva: ");
-		scanf(" %c", &tipoPassagem);
+    while (continuarReserva != 'n' && continuarReserva != 'N') {
+        // Verifica se o tipo de poltrona é válido
+        do {
+            printf("\nDigite o tipo de poltrona que prefere [1] economica ou [2] executiva: ");
+            scanf(" %c", &tipoPassagem);
+            if (tipoPassagem != '1' && tipoPassagem != '2') {
+                printf("\nOpcao invalida. Por favor, digite 1 para economica ou 2 para executiva.\n");
+            }
+        } while (tipoPassagem != '1' && tipoPassagem != '2'); // Continua perguntando até ser uma opção valida
 
-		do {
-			printf("\nDigite a fileira da poltrona (de 1 a 10!): ");
-			scanf("%d", &fileira);
-			printf("\nDigite a coluna de poltrona que deseja pode ser [A][B][C][D][E] ou [F]: ");
-			scanf(" %c", &poltrona);
-			
-			// Converter a letra para maiúscula
-			poltrona = toupper(poltrona);
-			
-			switch (poltrona) {
-				case 'A':
-					acento = 0;
-					break;
-				case 'B':
-					acento = 1;
-					break;
-				case 'C':
-					acento = 2;
-					break;
-				case 'D':
-					acento = 3;
-					break;
-				case 'E':
-					acento = 4;
-					break;
-				case 'F':
-					acento = 5;
-					break;
-				default:
-					printf("\nPoltrona invalida");
-					continue;
-			}
+        do {
+            printf("\nDigite a fileira da poltrona (de 1 a 10!): ");
+            scanf("%d", &fileira);
+            printf("\nDigite a coluna de poltrona que deseja pode ser [A][B][C][D][E] ou [F]: ");
+            scanf(" %c", &poltrona);
+            
+            poltrona = toupper(poltrona);
+            
+            switch (poltrona) {
+                case 'A':
+                    acento = 0;
+                    break;
+                case 'B':
+                    acento = 1;
+                    break;
+                case 'C':
+                    acento = 2;
+                    break;
+                case 'D':
+                    acento = 3;
+                    break;
+                case 'E':
+                    acento = 4;
+                    break;
+                case 'F':
+                    acento = 5;
+                    break;
+                default:
+                    printf("\nPoltrona invalida.");
+                    continue;
+            }
 
-			// Validação de acordo com o tipo de passagem
-			if (tipoPassagem == '1') { // Econômica
-				if (poltrona == 'A' || poltrona == 'F') {
-					printf("\nPoltronas A e F são somente para a classe executiva. Escolha outro :).\n");
-					continue;
-				}
-			} else if (tipoPassagem == '2') { // Executiva
-				if (poltrona != 'A' && poltrona != 'F') {
-					printf("\nPoltronas A e F são prioritárias para a classe executiva.Te recomendamos ela por ser mais confortável! :D\n");
-				}
-			}
+            // Validação de acordo com o tipo de passagem
+            if (tipoPassagem == '1') { // Economica
+                if (poltrona == 'A' || poltrona == 'F') {
+                    printf("\nPoltronas A e F sao somente para a classe executiva. Escolha outro :).\n");
+                    acento = -1;  // Reseta acento invalido para evitar reserva
+                    continue;
+                }
+            } else if (tipoPassagem == '2') { // Executiva
+                if (poltrona != 'A' && poltrona != 'F') {
+                    printf("\nPoltronas A e F sao prioritarias para a classe executiva. Recomendamos que escolha uma delas.\n");
+                }
+            }
 
-			// Verificação se a poltrona já está ocupada
-			if (reserva[fileira - 1][acento] == 'x') {
-				printf("\nEssa poltrona já está reservada. Por favor, escolha outro.\n");
-			}
-		} while (reserva[fileira - 1][acento] == 'x'); // Repetir enquanto o assento estiver ocupado
-		
-		// Reservar o assento
-		reserva[fileira - 1][acento] = 'x';
+            // Verificação se a poltrona já está ocupada
+            if (acento != -1 && reserva[fileira - 1][acento] == 'x') {
+                printf("\nEssa poltrona ja esta reservada. Por favor, escolha outra.\n");
+                acento = -1;  // Reseta acento invalido para evitar reserva
+            }
+        } while (acento == -1); // Repetir enquanto o assento for inválido ou ocupado
+        
+        // Reservar o assento
+        reserva[fileira - 1][acento] = 'x';
 
-		printf("\n\t\t[A] [B] [C]\t[D] [E] [F]\n");
-		
-		for (int x = 0; x < 10; x++) {
-			if (x < 9)	printf("\n\t0%d\t", x + 1);
-			else		printf("\n\t%d\t", x + 1);
-			
-			for (int y = 0; y < 6; y++) {
-				printf("[%c] ", reserva[x][y]);
-				if (y == 2) {
-					printf("\t");
-				}
-			}
-		}
-		printf("\n");
+        // Exibir mapa atualizado das poltronas
+        printf("\n\t\t[A] [B] [C]\t[D] [E] [F]\n");
+        for (int x = 0; x < 10; x++) {
+            if (x < 9)    printf("\n\t0%d\t", x + 1);
+            else        printf("\n\t%d\t", x + 1);
+            
+            for (int y = 0; y < 6; y++) {
+                printf("[%c] ", reserva[x][y] == 'x' ? 'x' : ' ');
+                if (y == 2) {
+                    printf("\t");
+                }
+            }
+        }
+        printf("\n");
 
-		// Perguntar se deseja continuar
-		printf("\nVoce deseja realizar outra reserva? [s/n]: ");
-		scanf(" %c", &continuarReserva);
-	}
+        // Perguntar se deseja continuar
+        printf("\nVoce deseja realizar outra reserva? [s/n]: ");
+        scanf(" %c", &continuarReserva);
+    }
 
-	printf("\nEncerrando o sistema de reservas. Muito obrigada pela escolha!\n");
+    printf("\nEncerrando o sistema de reservas. Muito obrigada pela escolha!\n");
 }
