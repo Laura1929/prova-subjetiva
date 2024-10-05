@@ -16,8 +16,8 @@ int main(int argc, char** argv) {
     };
     printf("\n........ Mapa de Poltronas! :D .......\n");
     printf("\nSegue legenda para maior entendimento:\n");
-    printf("\n[ ]--> para poltrona disponivel\n");
-    printf("\n[x]--> para poltrona ocupada\n");
+    printf("\n[ ]--> Para poltrona disponível\n");
+    printf("\n[x]--> Para poltrona ocupada\n");
     printf("\n\t\t[A] [B] [C]\t[D] [E] [F]\n");
     for (int x = 0; x < 10; x++) {
         if (x != 9)    printf("\n\t0%d\t", x + 1);
@@ -40,10 +40,10 @@ int main(int argc, char** argv) {
     while (continuarReserva != 'n' && continuarReserva != 'N') {
         // Verifica se o tipo de poltrona é válido
         do {
-            printf("\nDigite o tipo de poltrona que prefere [1] economica ou [2] executiva: ");
+            printf("\nDigite o tipo de poltrona que prefere [1] econômica ou [2] executiva: ");
             scanf(" %c", &tipoPassagem);
             if (tipoPassagem != '1' && tipoPassagem != '2') {
-                printf("\nOpcao invalida. Por favor, digite 1 para economica ou 2 para executiva.\n");
+                printf("\nOpção invalida. Por favor, digite 1 para econômica ou 2 para executiva.\n");
             }
         } while (tipoPassagem != '1' && tipoPassagem != '2'); // Continua perguntando até ser uma opção valida
 
